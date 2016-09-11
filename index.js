@@ -8,7 +8,7 @@
  * (for example, ["ab", "d", "cb", "ba", "bc"] → [["ab", "ba"], ["cb", "bc"]])
  */
 function findAnagrams(words) {
-    // "signatures" are sorted strings of letters which make up the words in the values' strings.
+    // a word's "signature" is a sorted string of symbols which make up that word
     const signaturesToAnagrams = {};
     const sortedAnagrams = [];
 
