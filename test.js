@@ -1,4 +1,3 @@
-//var findAnagrams = require('./index.js');
 const _ = require('lodash');
 const findAnagrams = require('./index.js');
 

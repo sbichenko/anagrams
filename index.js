@@ -8,36 +8,21 @@
  * (for example, ["ab", "d", "cb", "ba", "bc"] → [["ab", "ba"], ["cb", "bc"]])
  */
 function findAnagrams(words) {
-    /**
-     * @type {Object<string, Array<string>>}  keys are sorted strings of letters which make up the words
-     * in the value's arrays
-     */
-    const cache = {};
-    const singleWordCache = {};
-    const sortedSignatures = [];
-
-    words.forEach(function(word) {
-        const signature = word.split('').sort().join('');
-        if (!(signature in cache)) {
-            const newArray = [];
-            cache[signature] = newArray;
-            sortedSignatures.push(signature);
-            singleWordCache[signature] = true;
-        }
-        const anagramArray = cache[signature];
-        cache[signature].push(word);
-        if (anagramArray.length > 1) {
-            delete singleWordCache[signature];
-        }
-    });
+    // "signatures" are sorted strings of letters which make up the words in the values' strings.
+    const signaturesToAnagrams = {};
     const sortedAnagrams = [];
-    sortedSignatures.forEach(function(signature) {
-        if (signature in singleWordCache) {
-            return;
+
+    words.forEach(word => {
+        const signature = word.split('').sort().join('');
+        if (!(signature in signaturesToAnagrams)) {
+            const newAnagrams = [];
+            signaturesToAnagrams[signature] = newAnagrams;
+            sortedAnagrams.push(newAnagrams);
         }
-        sortedAnagrams.push(cache[signature]);
+        const anagrams = signaturesToAnagrams[signature];
+        anagrams.push(word);
     });
-    return sortedAnagrams;
+    return sortedAnagrams.filter(anagrams => anagrams.length > 1);
 }
 
 module.exports = findAnagrams;
